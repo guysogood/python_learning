@@ -5,17 +5,19 @@ def turn_right():
     turn_left()
     turn_left()
 
-def walk():
-    if wall_on_right() and front_is_clear():
+def jump():
+    turn_left()
+    while wall_on_right():
         move()
-    elif wall_on_right() and wall_in_front():
-        turn_left()
-    elif wall_on_right() != True and is_facing_north():
-        turn_right()
+    turn_right()
+    move()
+    turn_right()
+    while front_is_clear():
         move()
-        turn_right()
-    elif wall_on_right() != True and front_is_clear():
-        move()
+    turn_left()
 
 while at_goal() != True:
-    walk()
+    if wall_in_front():
+        jump()
+    else:
+        move()
